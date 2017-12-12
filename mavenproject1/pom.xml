@@ -8,10 +8,10 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
   <groupId>fr.gtm</groupId>
-  <artifactId>mavenproject1</artifactId>
+  <artifactId>webapp</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
-  <name>mavenproject1 Maven Webapp</name>
+  <name>Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>

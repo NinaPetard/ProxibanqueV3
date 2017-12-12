@@ -1,0 +1,38 @@
+PROXIBANQUE v3 
+
+La banque ProxiBanque souhaite créer une application permettant à ses conseillers de gérer leurs clients et services à forte valeur ajoutée, comme le service de virement compte à compte.
+La DSI de Proxibanque souhaite faire évoluer les technologies utilisées pour la réalisation de l’application. Reprendre exactement le même périmètre fonctionnel que Proxibanque v2. Ce qui change, ce sont les technologies utilisées.
+Contraintes :
+-	Pour la conception 
+o	Diagramme de cas d’utilisation
+o	Diagramme de classe 
+-	Pour le front Office : 
+o	la mise en œuvre technologies BOOTSTRAP, JSP, Servlet, JSTL 
+-	Pour le back Office :
+o	WebService JAX-RS, implémentation framework Jersey
+o	Accès aux données JPA, implémentation framework Hibernate
+o	La mise en œuvre Framework Log4j (tracer virements dans fichier proxibanque.log)
+-	Industrialisation 
+o	Gestion de code source avec GIT et GITHUB
+o	Automatisation des taches avec MAVEN
+o	Tests unitaires avec JUNIT 
+-	Pour le développement & architecture
+o	Architecture en couche
+o	Gestion d’erreurs applicatives
+o	Gestion d’erreurs HTTP
+-	Pour le déploiement, 
+o	Serveur d’application TOMCAT
+Comme pour Proxibanque v2, il sera demandé :
+•	Readme.txt , Javadoc, Sources 
+
+Chaque binôme est prié de fournir le lien Github à partir duquel récupérer le dossier traditionnellement livré.
+Critères notation (/50) :
+•	Installation : 5
+•	Documentation (Javadoc) : 5
+•	Respect cahier des charges (Fonctionnel) : 10
+•	Conception : 5
+•	Codage : 5
+•	Architecture : 5
+•	Ergonomie : 5
+•	Test : 5
+•	Sécurité : 5

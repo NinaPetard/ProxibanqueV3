@@ -11,6 +11,8 @@
 	<servlet>
 		// a renseigner
 	</servlet>
+	
+	//Gestion erreur HTTP
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
 		<location>/error_page.jsp</location>

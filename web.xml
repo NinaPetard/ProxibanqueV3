@@ -3,13 +3,13 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
-	<display-name>ProxiBanquev2_KR</display-name>
+	
+	<display-name>proxibanquev3</display-name>
 	<welcome-file-list>
-		<welcome-file>login.html</welcome-file>
+		//a renseigner
 	</welcome-file-list>
 	<servlet>
-		<servlet-name>MaServlet1_Login</servlet-name>
-		<servlet-class>com.objis.proxibanque.presentation.MaServlet1_Login</servlet-class>
+		// a renseigner
 	</servlet>
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>

@@ -26,6 +26,5 @@
     <module>domaine</module>
     <module>service</module>
     <module>dao</module>
-    <module>presentation</module>
   </modules>
 </project>

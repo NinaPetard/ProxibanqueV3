@@ -1,13 +1,22 @@
 package fr.gtm.service;
 
-/**
- * Hello world!
- *
- */
+import fr.gtm.domaine.Client;
+import fr.gtm.domaine.Conseiller;
+import java.util.ArrayList;
+
+
+
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        Conseiller conseiller = new Conseiller();
+        conseiller.setIdconseiller(2L);
+        
+        
+        ArrayList<Client> clients;
+        Service_Conseiller sc = new Service_Conseiller();
+        clients = sc.listeClientConseiller(conseiller);
+        
     }
 }

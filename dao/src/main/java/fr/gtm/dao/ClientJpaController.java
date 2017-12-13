@@ -16,7 +16,6 @@ import javax.persistence.criteria.Root;
 import fr.gtm.domaine.Conseiller;
 import fr.gtm.domaine.Compte;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -37,8 +36,8 @@ public class ClientJpaController implements Serializable {
     }
 
     public void create(Client client) throws PreexistingEntityException, Exception {
-        if (client.getCompteCollection() == null) {
-            client.setCompteCollection(new ArrayList<Compte>());
+        if (client.getCompteList() == null) {
+            client.setCompteList(new ArrayList<Compte>());
         }
         EntityManager em = null;
         try {
@@ -49,24 +48,24 @@ public class ClientJpaController implements Serializable {
                 idconseiller = em.getReference(idconseiller.getClass(), idconseiller.getIdconseiller());
                 client.setIdconseiller(idconseiller);
             }
-            Collection<Compte> attachedCompteCollection = new ArrayList<Compte>();
-            for (Compte compteCollectionCompteToAttach : client.getCompteCollection()) {
-                compteCollectionCompteToAttach = em.getReference(compteCollectionCompteToAttach.getClass(), compteCollectionCompteToAttach.getIdcompte());
-                attachedCompteCollection.add(compteCollectionCompteToAttach);
+            List<Compte> attachedCompteList = new ArrayList<Compte>();
+            for (Compte compteListCompteToAttach : client.getCompteList()) {
+                compteListCompteToAttach = em.getReference(compteListCompteToAttach.getClass(), compteListCompteToAttach.getIdcompte());
+                attachedCompteList.add(compteListCompteToAttach);
             }
-            client.setCompteCollection(attachedCompteCollection);
+            client.setCompteList(attachedCompteList);
             em.persist(client);
             if (idconseiller != null) {
-                idconseiller.getClientCollection().add(client);
+                idconseiller.getClientList().add(client);
                 idconseiller = em.merge(idconseiller);
             }
-            for (Compte compteCollectionCompte : client.getCompteCollection()) {
-                Client oldIdclientOfCompteCollectionCompte = compteCollectionCompte.getIdclient();
-                compteCollectionCompte.setIdclient(client);
-                compteCollectionCompte = em.merge(compteCollectionCompte);
-                if (oldIdclientOfCompteCollectionCompte != null) {
-                    oldIdclientOfCompteCollectionCompte.getCompteCollection().remove(compteCollectionCompte);
-                    oldIdclientOfCompteCollectionCompte = em.merge(oldIdclientOfCompteCollectionCompte);
+            for (Compte compteListCompte : client.getCompteList()) {
+                Client oldIdclientOfCompteListCompte = compteListCompte.getIdclient();
+                compteListCompte.setIdclient(client);
+                compteListCompte = em.merge(compteListCompte);
+                if (oldIdclientOfCompteListCompte != null) {
+                    oldIdclientOfCompteListCompte.getCompteList().remove(compteListCompte);
+                    oldIdclientOfCompteListCompte = em.merge(oldIdclientOfCompteListCompte);
                 }
             }
             em.getTransaction().commit();
@@ -90,42 +89,42 @@ public class ClientJpaController implements Serializable {
             Client persistentClient = em.find(Client.class, client.getIdclient());
             Conseiller idconseillerOld = persistentClient.getIdconseiller();
             Conseiller idconseillerNew = client.getIdconseiller();
-            Collection<Compte> compteCollectionOld = persistentClient.getCompteCollection();
-            Collection<Compte> compteCollectionNew = client.getCompteCollection();
+            List<Compte> compteListOld = persistentClient.getCompteList();
+            List<Compte> compteListNew = client.getCompteList();
             if (idconseillerNew != null) {
                 idconseillerNew = em.getReference(idconseillerNew.getClass(), idconseillerNew.getIdconseiller());
                 client.setIdconseiller(idconseillerNew);
             }
-            Collection<Compte> attachedCompteCollectionNew = new ArrayList<Compte>();
-            for (Compte compteCollectionNewCompteToAttach : compteCollectionNew) {
-                compteCollectionNewCompteToAttach = em.getReference(compteCollectionNewCompteToAttach.getClass(), compteCollectionNewCompteToAttach.getIdcompte());
-                attachedCompteCollectionNew.add(compteCollectionNewCompteToAttach);
+            List<Compte> attachedCompteListNew = new ArrayList<Compte>();
+            for (Compte compteListNewCompteToAttach : compteListNew) {
+                compteListNewCompteToAttach = em.getReference(compteListNewCompteToAttach.getClass(), compteListNewCompteToAttach.getIdcompte());
+                attachedCompteListNew.add(compteListNewCompteToAttach);
             }
-            compteCollectionNew = attachedCompteCollectionNew;
-            client.setCompteCollection(compteCollectionNew);
+            compteListNew = attachedCompteListNew;
+            client.setCompteList(compteListNew);
             client = em.merge(client);
             if (idconseillerOld != null && !idconseillerOld.equals(idconseillerNew)) {
-                idconseillerOld.getClientCollection().remove(client);
+                idconseillerOld.getClientList().remove(client);
                 idconseillerOld = em.merge(idconseillerOld);
             }
             if (idconseillerNew != null && !idconseillerNew.equals(idconseillerOld)) {
-                idconseillerNew.getClientCollection().add(client);
+                idconseillerNew.getClientList().add(client);
                 idconseillerNew = em.merge(idconseillerNew);
             }
-            for (Compte compteCollectionOldCompte : compteCollectionOld) {
-                if (!compteCollectionNew.contains(compteCollectionOldCompte)) {
-                    compteCollectionOldCompte.setIdclient(null);
-                    compteCollectionOldCompte = em.merge(compteCollectionOldCompte);
+            for (Compte compteListOldCompte : compteListOld) {
+                if (!compteListNew.contains(compteListOldCompte)) {
+                    compteListOldCompte.setIdclient(null);
+                    compteListOldCompte = em.merge(compteListOldCompte);
                 }
             }
-            for (Compte compteCollectionNewCompte : compteCollectionNew) {
-                if (!compteCollectionOld.contains(compteCollectionNewCompte)) {
-                    Client oldIdclientOfCompteCollectionNewCompte = compteCollectionNewCompte.getIdclient();
-                    compteCollectionNewCompte.setIdclient(client);
-                    compteCollectionNewCompte = em.merge(compteCollectionNewCompte);
-                    if (oldIdclientOfCompteCollectionNewCompte != null && !oldIdclientOfCompteCollectionNewCompte.equals(client)) {
-                        oldIdclientOfCompteCollectionNewCompte.getCompteCollection().remove(compteCollectionNewCompte);
-                        oldIdclientOfCompteCollectionNewCompte = em.merge(oldIdclientOfCompteCollectionNewCompte);
+            for (Compte compteListNewCompte : compteListNew) {
+                if (!compteListOld.contains(compteListNewCompte)) {
+                    Client oldIdclientOfCompteListNewCompte = compteListNewCompte.getIdclient();
+                    compteListNewCompte.setIdclient(client);
+                    compteListNewCompte = em.merge(compteListNewCompte);
+                    if (oldIdclientOfCompteListNewCompte != null && !oldIdclientOfCompteListNewCompte.equals(client)) {
+                        oldIdclientOfCompteListNewCompte.getCompteList().remove(compteListNewCompte);
+                        oldIdclientOfCompteListNewCompte = em.merge(oldIdclientOfCompteListNewCompte);
                     }
                 }
             }
@@ -160,13 +159,13 @@ public class ClientJpaController implements Serializable {
             }
             Conseiller idconseiller = client.getIdconseiller();
             if (idconseiller != null) {
-                idconseiller.getClientCollection().remove(client);
+                idconseiller.getClientList().remove(client);
                 idconseiller = em.merge(idconseiller);
             }
-            Collection<Compte> compteCollection = client.getCompteCollection();
-            for (Compte compteCollectionCompte : compteCollection) {
-                compteCollectionCompte.setIdclient(null);
-                compteCollectionCompte = em.merge(compteCollectionCompte);
+            List<Compte> compteList = client.getCompteList();
+            for (Compte compteListCompte : compteList) {
+                compteListCompte.setIdclient(null);
+                compteListCompte = em.merge(compteListCompte);
             }
             em.remove(client);
             em.getTransaction().commit();

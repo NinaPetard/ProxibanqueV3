@@ -16,7 +16,6 @@ import fr.gtm.domaine.Client;
 import fr.gtm.domaine.Compte;
 import fr.gtm.domaine.Virement;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -37,11 +36,11 @@ public class CompteJpaController implements Serializable {
     }
 
     public void create(Compte compte) throws PreexistingEntityException, Exception {
-        if (compte.getVirementCollection() == null) {
-            compte.setVirementCollection(new ArrayList<Virement>());
+        if (compte.getVirementList() == null) {
+            compte.setVirementList(new ArrayList<Virement>());
         }
-        if (compte.getVirementCollection1() == null) {
-            compte.setVirementCollection1(new ArrayList<Virement>());
+        if (compte.getVirementList1() == null) {
+            compte.setVirementList1(new ArrayList<Virement>());
         }
         EntityManager em = null;
         try {
@@ -52,39 +51,39 @@ public class CompteJpaController implements Serializable {
                 idclient = em.getReference(idclient.getClass(), idclient.getIdclient());
                 compte.setIdclient(idclient);
             }
-            Collection<Virement> attachedVirementCollection = new ArrayList<Virement>();
-            for (Virement virementCollectionVirementToAttach : compte.getVirementCollection()) {
-                virementCollectionVirementToAttach = em.getReference(virementCollectionVirementToAttach.getClass(), virementCollectionVirementToAttach.getIdvirement());
-                attachedVirementCollection.add(virementCollectionVirementToAttach);
+            List<Virement> attachedVirementList = new ArrayList<Virement>();
+            for (Virement virementListVirementToAttach : compte.getVirementList()) {
+                virementListVirementToAttach = em.getReference(virementListVirementToAttach.getClass(), virementListVirementToAttach.getIdvirement());
+                attachedVirementList.add(virementListVirementToAttach);
             }
-            compte.setVirementCollection(attachedVirementCollection);
-            Collection<Virement> attachedVirementCollection1 = new ArrayList<Virement>();
-            for (Virement virementCollection1VirementToAttach : compte.getVirementCollection1()) {
-                virementCollection1VirementToAttach = em.getReference(virementCollection1VirementToAttach.getClass(), virementCollection1VirementToAttach.getIdvirement());
-                attachedVirementCollection1.add(virementCollection1VirementToAttach);
+            compte.setVirementList(attachedVirementList);
+            List<Virement> attachedVirementList1 = new ArrayList<Virement>();
+            for (Virement virementList1VirementToAttach : compte.getVirementList1()) {
+                virementList1VirementToAttach = em.getReference(virementList1VirementToAttach.getClass(), virementList1VirementToAttach.getIdvirement());
+                attachedVirementList1.add(virementList1VirementToAttach);
             }
-            compte.setVirementCollection1(attachedVirementCollection1);
+            compte.setVirementList1(attachedVirementList1);
             em.persist(compte);
             if (idclient != null) {
-                idclient.getCompteCollection().add(compte);
+                idclient.getCompteList().add(compte);
                 idclient = em.merge(idclient);
             }
-            for (Virement virementCollectionVirement : compte.getVirementCollection()) {
-                Compte oldIdcomptedebitOfVirementCollectionVirement = virementCollectionVirement.getIdcomptedebit();
-                virementCollectionVirement.setIdcomptedebit(compte);
-                virementCollectionVirement = em.merge(virementCollectionVirement);
-                if (oldIdcomptedebitOfVirementCollectionVirement != null) {
-                    oldIdcomptedebitOfVirementCollectionVirement.getVirementCollection().remove(virementCollectionVirement);
-                    oldIdcomptedebitOfVirementCollectionVirement = em.merge(oldIdcomptedebitOfVirementCollectionVirement);
+            for (Virement virementListVirement : compte.getVirementList()) {
+                Compte oldIdcomptedebitOfVirementListVirement = virementListVirement.getIdcomptedebit();
+                virementListVirement.setIdcomptedebit(compte);
+                virementListVirement = em.merge(virementListVirement);
+                if (oldIdcomptedebitOfVirementListVirement != null) {
+                    oldIdcomptedebitOfVirementListVirement.getVirementList().remove(virementListVirement);
+                    oldIdcomptedebitOfVirementListVirement = em.merge(oldIdcomptedebitOfVirementListVirement);
                 }
             }
-            for (Virement virementCollection1Virement : compte.getVirementCollection1()) {
-                Compte oldIdcomptecreditOfVirementCollection1Virement = virementCollection1Virement.getIdcomptecredit();
-                virementCollection1Virement.setIdcomptecredit(compte);
-                virementCollection1Virement = em.merge(virementCollection1Virement);
-                if (oldIdcomptecreditOfVirementCollection1Virement != null) {
-                    oldIdcomptecreditOfVirementCollection1Virement.getVirementCollection1().remove(virementCollection1Virement);
-                    oldIdcomptecreditOfVirementCollection1Virement = em.merge(oldIdcomptecreditOfVirementCollection1Virement);
+            for (Virement virementList1Virement : compte.getVirementList1()) {
+                Compte oldIdcomptecreditOfVirementList1Virement = virementList1Virement.getIdcomptecredit();
+                virementList1Virement.setIdcomptecredit(compte);
+                virementList1Virement = em.merge(virementList1Virement);
+                if (oldIdcomptecreditOfVirementList1Virement != null) {
+                    oldIdcomptecreditOfVirementList1Virement.getVirementList1().remove(virementList1Virement);
+                    oldIdcomptecreditOfVirementList1Virement = em.merge(oldIdcomptecreditOfVirementList1Virement);
                 }
             }
             em.getTransaction().commit();
@@ -108,68 +107,68 @@ public class CompteJpaController implements Serializable {
             Compte persistentCompte = em.find(Compte.class, compte.getIdcompte());
             Client idclientOld = persistentCompte.getIdclient();
             Client idclientNew = compte.getIdclient();
-            Collection<Virement> virementCollectionOld = persistentCompte.getVirementCollection();
-            Collection<Virement> virementCollectionNew = compte.getVirementCollection();
-            Collection<Virement> virementCollection1Old = persistentCompte.getVirementCollection1();
-            Collection<Virement> virementCollection1New = compte.getVirementCollection1();
+            List<Virement> virementListOld = persistentCompte.getVirementList();
+            List<Virement> virementListNew = compte.getVirementList();
+            List<Virement> virementList1Old = persistentCompte.getVirementList1();
+            List<Virement> virementList1New = compte.getVirementList1();
             if (idclientNew != null) {
                 idclientNew = em.getReference(idclientNew.getClass(), idclientNew.getIdclient());
                 compte.setIdclient(idclientNew);
             }
-            Collection<Virement> attachedVirementCollectionNew = new ArrayList<Virement>();
-            for (Virement virementCollectionNewVirementToAttach : virementCollectionNew) {
-                virementCollectionNewVirementToAttach = em.getReference(virementCollectionNewVirementToAttach.getClass(), virementCollectionNewVirementToAttach.getIdvirement());
-                attachedVirementCollectionNew.add(virementCollectionNewVirementToAttach);
+            List<Virement> attachedVirementListNew = new ArrayList<Virement>();
+            for (Virement virementListNewVirementToAttach : virementListNew) {
+                virementListNewVirementToAttach = em.getReference(virementListNewVirementToAttach.getClass(), virementListNewVirementToAttach.getIdvirement());
+                attachedVirementListNew.add(virementListNewVirementToAttach);
             }
-            virementCollectionNew = attachedVirementCollectionNew;
-            compte.setVirementCollection(virementCollectionNew);
-            Collection<Virement> attachedVirementCollection1New = new ArrayList<Virement>();
-            for (Virement virementCollection1NewVirementToAttach : virementCollection1New) {
-                virementCollection1NewVirementToAttach = em.getReference(virementCollection1NewVirementToAttach.getClass(), virementCollection1NewVirementToAttach.getIdvirement());
-                attachedVirementCollection1New.add(virementCollection1NewVirementToAttach);
+            virementListNew = attachedVirementListNew;
+            compte.setVirementList(virementListNew);
+            List<Virement> attachedVirementList1New = new ArrayList<Virement>();
+            for (Virement virementList1NewVirementToAttach : virementList1New) {
+                virementList1NewVirementToAttach = em.getReference(virementList1NewVirementToAttach.getClass(), virementList1NewVirementToAttach.getIdvirement());
+                attachedVirementList1New.add(virementList1NewVirementToAttach);
             }
-            virementCollection1New = attachedVirementCollection1New;
-            compte.setVirementCollection1(virementCollection1New);
+            virementList1New = attachedVirementList1New;
+            compte.setVirementList1(virementList1New);
             compte = em.merge(compte);
             if (idclientOld != null && !idclientOld.equals(idclientNew)) {
-                idclientOld.getCompteCollection().remove(compte);
+                idclientOld.getCompteList().remove(compte);
                 idclientOld = em.merge(idclientOld);
             }
             if (idclientNew != null && !idclientNew.equals(idclientOld)) {
-                idclientNew.getCompteCollection().add(compte);
+                idclientNew.getCompteList().add(compte);
                 idclientNew = em.merge(idclientNew);
             }
-            for (Virement virementCollectionOldVirement : virementCollectionOld) {
-                if (!virementCollectionNew.contains(virementCollectionOldVirement)) {
-                    virementCollectionOldVirement.setIdcomptedebit(null);
-                    virementCollectionOldVirement = em.merge(virementCollectionOldVirement);
+            for (Virement virementListOldVirement : virementListOld) {
+                if (!virementListNew.contains(virementListOldVirement)) {
+                    virementListOldVirement.setIdcomptedebit(null);
+                    virementListOldVirement = em.merge(virementListOldVirement);
                 }
             }
-            for (Virement virementCollectionNewVirement : virementCollectionNew) {
-                if (!virementCollectionOld.contains(virementCollectionNewVirement)) {
-                    Compte oldIdcomptedebitOfVirementCollectionNewVirement = virementCollectionNewVirement.getIdcomptedebit();
-                    virementCollectionNewVirement.setIdcomptedebit(compte);
-                    virementCollectionNewVirement = em.merge(virementCollectionNewVirement);
-                    if (oldIdcomptedebitOfVirementCollectionNewVirement != null && !oldIdcomptedebitOfVirementCollectionNewVirement.equals(compte)) {
-                        oldIdcomptedebitOfVirementCollectionNewVirement.getVirementCollection().remove(virementCollectionNewVirement);
-                        oldIdcomptedebitOfVirementCollectionNewVirement = em.merge(oldIdcomptedebitOfVirementCollectionNewVirement);
+            for (Virement virementListNewVirement : virementListNew) {
+                if (!virementListOld.contains(virementListNewVirement)) {
+                    Compte oldIdcomptedebitOfVirementListNewVirement = virementListNewVirement.getIdcomptedebit();
+                    virementListNewVirement.setIdcomptedebit(compte);
+                    virementListNewVirement = em.merge(virementListNewVirement);
+                    if (oldIdcomptedebitOfVirementListNewVirement != null && !oldIdcomptedebitOfVirementListNewVirement.equals(compte)) {
+                        oldIdcomptedebitOfVirementListNewVirement.getVirementList().remove(virementListNewVirement);
+                        oldIdcomptedebitOfVirementListNewVirement = em.merge(oldIdcomptedebitOfVirementListNewVirement);
                     }
                 }
             }
-            for (Virement virementCollection1OldVirement : virementCollection1Old) {
-                if (!virementCollection1New.contains(virementCollection1OldVirement)) {
-                    virementCollection1OldVirement.setIdcomptecredit(null);
-                    virementCollection1OldVirement = em.merge(virementCollection1OldVirement);
+            for (Virement virementList1OldVirement : virementList1Old) {
+                if (!virementList1New.contains(virementList1OldVirement)) {
+                    virementList1OldVirement.setIdcomptecredit(null);
+                    virementList1OldVirement = em.merge(virementList1OldVirement);
                 }
             }
-            for (Virement virementCollection1NewVirement : virementCollection1New) {
-                if (!virementCollection1Old.contains(virementCollection1NewVirement)) {
-                    Compte oldIdcomptecreditOfVirementCollection1NewVirement = virementCollection1NewVirement.getIdcomptecredit();
-                    virementCollection1NewVirement.setIdcomptecredit(compte);
-                    virementCollection1NewVirement = em.merge(virementCollection1NewVirement);
-                    if (oldIdcomptecreditOfVirementCollection1NewVirement != null && !oldIdcomptecreditOfVirementCollection1NewVirement.equals(compte)) {
-                        oldIdcomptecreditOfVirementCollection1NewVirement.getVirementCollection1().remove(virementCollection1NewVirement);
-                        oldIdcomptecreditOfVirementCollection1NewVirement = em.merge(oldIdcomptecreditOfVirementCollection1NewVirement);
+            for (Virement virementList1NewVirement : virementList1New) {
+                if (!virementList1Old.contains(virementList1NewVirement)) {
+                    Compte oldIdcomptecreditOfVirementList1NewVirement = virementList1NewVirement.getIdcomptecredit();
+                    virementList1NewVirement.setIdcomptecredit(compte);
+                    virementList1NewVirement = em.merge(virementList1NewVirement);
+                    if (oldIdcomptecreditOfVirementList1NewVirement != null && !oldIdcomptecreditOfVirementList1NewVirement.equals(compte)) {
+                        oldIdcomptecreditOfVirementList1NewVirement.getVirementList1().remove(virementList1NewVirement);
+                        oldIdcomptecreditOfVirementList1NewVirement = em.merge(oldIdcomptecreditOfVirementList1NewVirement);
                     }
                 }
             }
@@ -204,18 +203,18 @@ public class CompteJpaController implements Serializable {
             }
             Client idclient = compte.getIdclient();
             if (idclient != null) {
-                idclient.getCompteCollection().remove(compte);
+                idclient.getCompteList().remove(compte);
                 idclient = em.merge(idclient);
             }
-            Collection<Virement> virementCollection = compte.getVirementCollection();
-            for (Virement virementCollectionVirement : virementCollection) {
-                virementCollectionVirement.setIdcomptedebit(null);
-                virementCollectionVirement = em.merge(virementCollectionVirement);
+            List<Virement> virementList = compte.getVirementList();
+            for (Virement virementListVirement : virementList) {
+                virementListVirement.setIdcomptedebit(null);
+                virementListVirement = em.merge(virementListVirement);
             }
-            Collection<Virement> virementCollection1 = compte.getVirementCollection1();
-            for (Virement virementCollection1Virement : virementCollection1) {
-                virementCollection1Virement.setIdcomptecredit(null);
-                virementCollection1Virement = em.merge(virementCollection1Virement);
+            List<Virement> virementList1 = compte.getVirementList1();
+            for (Virement virementList1Virement : virementList1) {
+                virementList1Virement.setIdcomptecredit(null);
+                virementList1Virement = em.merge(virementList1Virement);
             }
             em.remove(compte);
             em.getTransaction().commit();

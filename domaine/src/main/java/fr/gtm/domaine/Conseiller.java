@@ -6,7 +6,7 @@
 package fr.gtm.domaine;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,7 +51,7 @@ public class Conseiller implements Serializable {
     @Column(name = "PASSWORD")
     private String password;
     @OneToMany(mappedBy = "idconseiller")
-    private Collection<Client> clientCollection;
+    private List<Client> clientList;
 
     public Conseiller() {
     }
@@ -108,12 +108,12 @@ public class Conseiller implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Client> getClientCollection() {
-        return clientCollection;
+    public List<Client> getClientList() {
+        return clientList;
     }
 
-    public void setClientCollection(Collection<Client> clientCollection) {
-        this.clientCollection = clientCollection;
+    public void setClientList(List<Client> clientList) {
+        this.clientList = clientList;
     }
 
     @Override

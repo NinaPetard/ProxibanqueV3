@@ -7,7 +7,7 @@ package fr.gtm.domaine;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -59,9 +59,9 @@ public class Compte implements Serializable {
     @ManyToOne
     private Client idclient;
     @OneToMany(mappedBy = "idcomptedebit")
-    private Collection<Virement> virementCollection;
+    private List<Virement> virementList;
     @OneToMany(mappedBy = "idcomptecredit")
-    private Collection<Virement> virementCollection1;
+    private List<Virement> virementList1;
 
     public Compte() {
     }
@@ -127,21 +127,21 @@ public class Compte implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Virement> getVirementCollection() {
-        return virementCollection;
+    public List<Virement> getVirementList() {
+        return virementList;
     }
 
-    public void setVirementCollection(Collection<Virement> virementCollection) {
-        this.virementCollection = virementCollection;
+    public void setVirementList(List<Virement> virementList) {
+        this.virementList = virementList;
     }
 
     @XmlTransient
-    public Collection<Virement> getVirementCollection1() {
-        return virementCollection1;
+    public List<Virement> getVirementList1() {
+        return virementList1;
     }
 
-    public void setVirementCollection1(Collection<Virement> virementCollection1) {
-        this.virementCollection1 = virementCollection1;
+    public void setVirementList1(List<Virement> virementList1) {
+        this.virementList1 = virementList1;
     }
 
     @Override

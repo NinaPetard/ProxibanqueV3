@@ -50,11 +50,11 @@ public class VirementJpaController implements Serializable {
             }
             em.persist(virement);
             if (idcomptedebit != null) {
-                idcomptedebit.getVirementCollection().add(virement);
+                idcomptedebit.getVirementList().add(virement);
                 idcomptedebit = em.merge(idcomptedebit);
             }
             if (idcomptecredit != null) {
-                idcomptecredit.getVirementCollection().add(virement);
+                idcomptecredit.getVirementList().add(virement);
                 idcomptecredit = em.merge(idcomptecredit);
             }
             em.getTransaction().commit();
@@ -90,19 +90,19 @@ public class VirementJpaController implements Serializable {
             }
             virement = em.merge(virement);
             if (idcomptedebitOld != null && !idcomptedebitOld.equals(idcomptedebitNew)) {
-                idcomptedebitOld.getVirementCollection().remove(virement);
+                idcomptedebitOld.getVirementList().remove(virement);
                 idcomptedebitOld = em.merge(idcomptedebitOld);
             }
             if (idcomptedebitNew != null && !idcomptedebitNew.equals(idcomptedebitOld)) {
-                idcomptedebitNew.getVirementCollection().add(virement);
+                idcomptedebitNew.getVirementList().add(virement);
                 idcomptedebitNew = em.merge(idcomptedebitNew);
             }
             if (idcomptecreditOld != null && !idcomptecreditOld.equals(idcomptecreditNew)) {
-                idcomptecreditOld.getVirementCollection().remove(virement);
+                idcomptecreditOld.getVirementList().remove(virement);
                 idcomptecreditOld = em.merge(idcomptecreditOld);
             }
             if (idcomptecreditNew != null && !idcomptecreditNew.equals(idcomptecreditOld)) {
-                idcomptecreditNew.getVirementCollection().add(virement);
+                idcomptecreditNew.getVirementList().add(virement);
                 idcomptecreditNew = em.merge(idcomptecreditNew);
             }
             em.getTransaction().commit();
@@ -136,12 +136,12 @@ public class VirementJpaController implements Serializable {
             }
             Compte idcomptedebit = virement.getIdcomptedebit();
             if (idcomptedebit != null) {
-                idcomptedebit.getVirementCollection().remove(virement);
+                idcomptedebit.getVirementList().remove(virement);
                 idcomptedebit = em.merge(idcomptedebit);
             }
             Compte idcomptecredit = virement.getIdcomptecredit();
             if (idcomptecredit != null) {
-                idcomptecredit.getVirementCollection().remove(virement);
+                idcomptecredit.getVirementList().remove(virement);
                 idcomptecredit = em.merge(idcomptecredit);
             }
             em.remove(virement);

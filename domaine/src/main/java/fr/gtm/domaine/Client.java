@@ -6,7 +6,7 @@
 package fr.gtm.domaine;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -62,7 +62,7 @@ public class Client implements Serializable {
     @Column(name = "TELEPHONE")
     private String telephone;
     @OneToMany(mappedBy = "idclient")
-    private Collection<Compte> compteCollection;
+    private List<Compte> compteList;
     @JoinColumn(name = "IDCONSEILLER", referencedColumnName = "IDCONSEILLER")
     @ManyToOne
     private Conseiller idconseiller;
@@ -141,12 +141,12 @@ public class Client implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Compte> getCompteCollection() {
-        return compteCollection;
+    public List<Compte> getCompteList() {
+        return compteList;
     }
 
-    public void setCompteCollection(Collection<Compte> compteCollection) {
-        this.compteCollection = compteCollection;
+    public void setCompteList(List<Compte> compteList) {
+        this.compteList = compteList;
     }
 
     public Conseiller getIdconseiller() {

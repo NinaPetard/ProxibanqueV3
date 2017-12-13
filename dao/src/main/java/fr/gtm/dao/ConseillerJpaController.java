@@ -15,7 +15,6 @@ import javax.persistence.criteria.Root;
 import fr.gtm.domaine.Client;
 import fr.gtm.domaine.Conseiller;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -36,27 +35,27 @@ public class ConseillerJpaController implements Serializable {
     }
 
     public void create(Conseiller conseiller) throws PreexistingEntityException, Exception {
-        if (conseiller.getClientCollection() == null) {
-            conseiller.setClientCollection(new ArrayList<Client>());
+        if (conseiller.getClientList() == null) {
+            conseiller.setClientList(new ArrayList<Client>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<Client> attachedClientCollection = new ArrayList<Client>();
-            for (Client clientCollectionClientToAttach : conseiller.getClientCollection()) {
-                clientCollectionClientToAttach = em.getReference(clientCollectionClientToAttach.getClass(), clientCollectionClientToAttach.getIdclient());
-                attachedClientCollection.add(clientCollectionClientToAttach);
+            List<Client> attachedClientList = new ArrayList<Client>();
+            for (Client clientListClientToAttach : conseiller.getClientList()) {
+                clientListClientToAttach = em.getReference(clientListClientToAttach.getClass(), clientListClientToAttach.getIdclient());
+                attachedClientList.add(clientListClientToAttach);
             }
-            conseiller.setClientCollection(attachedClientCollection);
+            conseiller.setClientList(attachedClientList);
             em.persist(conseiller);
-            for (Client clientCollectionClient : conseiller.getClientCollection()) {
-                Conseiller oldIdconseillerOfClientCollectionClient = clientCollectionClient.getIdconseiller();
-                clientCollectionClient.setIdconseiller(conseiller);
-                clientCollectionClient = em.merge(clientCollectionClient);
-                if (oldIdconseillerOfClientCollectionClient != null) {
-                    oldIdconseillerOfClientCollectionClient.getClientCollection().remove(clientCollectionClient);
-                    oldIdconseillerOfClientCollectionClient = em.merge(oldIdconseillerOfClientCollectionClient);
+            for (Client clientListClient : conseiller.getClientList()) {
+                Conseiller oldIdconseillerOfClientListClient = clientListClient.getIdconseiller();
+                clientListClient.setIdconseiller(conseiller);
+                clientListClient = em.merge(clientListClient);
+                if (oldIdconseillerOfClientListClient != null) {
+                    oldIdconseillerOfClientListClient.getClientList().remove(clientListClient);
+                    oldIdconseillerOfClientListClient = em.merge(oldIdconseillerOfClientListClient);
                 }
             }
             em.getTransaction().commit();
@@ -78,30 +77,30 @@ public class ConseillerJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Conseiller persistentConseiller = em.find(Conseiller.class, conseiller.getIdconseiller());
-            Collection<Client> clientCollectionOld = persistentConseiller.getClientCollection();
-            Collection<Client> clientCollectionNew = conseiller.getClientCollection();
-            Collection<Client> attachedClientCollectionNew = new ArrayList<Client>();
-            for (Client clientCollectionNewClientToAttach : clientCollectionNew) {
-                clientCollectionNewClientToAttach = em.getReference(clientCollectionNewClientToAttach.getClass(), clientCollectionNewClientToAttach.getIdclient());
-                attachedClientCollectionNew.add(clientCollectionNewClientToAttach);
+            List<Client> clientListOld = persistentConseiller.getClientList();
+            List<Client> clientListNew = conseiller.getClientList();
+            List<Client> attachedClientListNew = new ArrayList<Client>();
+            for (Client clientListNewClientToAttach : clientListNew) {
+                clientListNewClientToAttach = em.getReference(clientListNewClientToAttach.getClass(), clientListNewClientToAttach.getIdclient());
+                attachedClientListNew.add(clientListNewClientToAttach);
             }
-            clientCollectionNew = attachedClientCollectionNew;
-            conseiller.setClientCollection(clientCollectionNew);
+            clientListNew = attachedClientListNew;
+            conseiller.setClientList(clientListNew);
             conseiller = em.merge(conseiller);
-            for (Client clientCollectionOldClient : clientCollectionOld) {
-                if (!clientCollectionNew.contains(clientCollectionOldClient)) {
-                    clientCollectionOldClient.setIdconseiller(null);
-                    clientCollectionOldClient = em.merge(clientCollectionOldClient);
+            for (Client clientListOldClient : clientListOld) {
+                if (!clientListNew.contains(clientListOldClient)) {
+                    clientListOldClient.setIdconseiller(null);
+                    clientListOldClient = em.merge(clientListOldClient);
                 }
             }
-            for (Client clientCollectionNewClient : clientCollectionNew) {
-                if (!clientCollectionOld.contains(clientCollectionNewClient)) {
-                    Conseiller oldIdconseillerOfClientCollectionNewClient = clientCollectionNewClient.getIdconseiller();
-                    clientCollectionNewClient.setIdconseiller(conseiller);
-                    clientCollectionNewClient = em.merge(clientCollectionNewClient);
-                    if (oldIdconseillerOfClientCollectionNewClient != null && !oldIdconseillerOfClientCollectionNewClient.equals(conseiller)) {
-                        oldIdconseillerOfClientCollectionNewClient.getClientCollection().remove(clientCollectionNewClient);
-                        oldIdconseillerOfClientCollectionNewClient = em.merge(oldIdconseillerOfClientCollectionNewClient);
+            for (Client clientListNewClient : clientListNew) {
+                if (!clientListOld.contains(clientListNewClient)) {
+                    Conseiller oldIdconseillerOfClientListNewClient = clientListNewClient.getIdconseiller();
+                    clientListNewClient.setIdconseiller(conseiller);
+                    clientListNewClient = em.merge(clientListNewClient);
+                    if (oldIdconseillerOfClientListNewClient != null && !oldIdconseillerOfClientListNewClient.equals(conseiller)) {
+                        oldIdconseillerOfClientListNewClient.getClientList().remove(clientListNewClient);
+                        oldIdconseillerOfClientListNewClient = em.merge(oldIdconseillerOfClientListNewClient);
                     }
                 }
             }
@@ -134,10 +133,10 @@ public class ConseillerJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The conseiller with id " + id + " no longer exists.", enfe);
             }
-            Collection<Client> clientCollection = conseiller.getClientCollection();
-            for (Client clientCollectionClient : clientCollection) {
-                clientCollectionClient.setIdconseiller(null);
-                clientCollectionClient = em.merge(clientCollectionClient);
+            List<Client> clientList = conseiller.getClientList();
+            for (Client clientListClient : clientList) {
+                clientListClient.setIdconseiller(null);
+                clientListClient = em.merge(clientListClient);
             }
             em.remove(conseiller);
             em.getTransaction().commit();

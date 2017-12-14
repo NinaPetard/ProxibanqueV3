@@ -1,4 +1,5 @@
-<%@ page language="java" isErrorPage="true" import="java.io.*" contentType="text/html"%>
+<%@ page language="java" isErrorPage="true" import="java.io.*"
+	contentType="text/html"%>
 
 <!DOCTYPE html>
 <html>
@@ -24,8 +25,19 @@
 <script src="assets/js/scripts.js"></script>
 </head>
 <body>
-<center>
-<p>Probleme technique rencontre. Le service n'est pas accessible, veuillez nous en excuser<p>
-<center>
+	<div class="col-sm-8 col-sm-offset-2 text">
+		<h1>
+			<strong>Probleme technique rencontre. Le service n'est pas
+				accessible, veuillez nous en excuser</strong>
+		</h1>
+		<div class="description">
+			<center>
+				<img class="img-responsive" src="assets/img/ProxiBanque.jpg"
+					alt="logo" style="width: 40%">
+				<center>
+					<br>
+					<p></p>
+		</div>
+	</div>
 </body>
 </html>

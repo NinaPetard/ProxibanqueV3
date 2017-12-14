@@ -35,9 +35,9 @@
   </dependencies>
   <modules>
     <module>domaine</module>
-    <module>service</module>
     <module>dao</module>
     <module>webapp</module>
     <module>presentation</module>
+    <module>service</module>
   </modules>
 </project>

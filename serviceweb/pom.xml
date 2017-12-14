@@ -17,6 +17,16 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>fr.gtm</groupId>
+                <artifactId>service</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.gtm</groupId>
+                <artifactId>domaine</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
                 <groupId>org.glassfish.jersey</groupId>
                 <artifactId>jersey-bom</artifactId>
                 <version>${jersey.version}</version>
@@ -58,14 +68,17 @@
             <version>4.0.0</version>
             <scope>provided</scope>
         </dependency>
-        <!-- La dépendance ci-dessous est pour si on veut utiliser que @ApplicationPath, sans web.xml, avec Tomcat -->
+        <!-- La dï¿½pendance ci-dessous est pour si on veut utiliser que @ApplicationPath, sans web.xml, avec Tomcat -->
         <dependency>
             <groupId>org.glassfish.jersey.bundles</groupId>
             <artifactId>jaxrs-ri</artifactId>
             <version>2.13</version>
         </dependency>
-    
-    
+        <dependency>
+            <groupId>org.glassfish.metro</groupId>
+            <artifactId>webservices-rt</artifactId>
+            <version>2.3</version>
+        </dependency>
     </dependencies>
     
     <properties>

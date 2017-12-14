@@ -5,7 +5,7 @@
  */
 package fr.gtm.webservice;
 
-import fr.gtm.domaine.Conseiller;
+import fr.gtm.service.Service_Conseiller;
 import static fr.gtm.service.Service_Conseiller.listerClientsConseiller;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;

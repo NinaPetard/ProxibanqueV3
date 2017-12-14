@@ -17,8 +17,7 @@ public class Service_Conseiller {
     
     public static ArrayList<Client> listerClientsConseiller(Conseiller conseiller){
         ArrayList<Client> clients = new ArrayList<Client>();
-        
-        
+        System.out.println("lalala");
         return clients;
         
     }

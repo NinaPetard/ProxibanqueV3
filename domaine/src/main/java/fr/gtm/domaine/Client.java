@@ -5,6 +5,10 @@
  */
 package fr.gtm.domaine;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -62,10 +66,14 @@ public class Client implements Serializable {
     @Basic(optional = false)
     @Column(name = "TELEPHONE")
     private String telephone;
+
     @OneToMany(mappedBy = "idclient", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("idclient")
     private List<Compte> compteList;
+
     @JoinColumn(name = "IDCONSEILLER", referencedColumnName = "IDCONSEILLER")
     @ManyToOne
+    @JsonIgnore
     private Conseiller idconseiller;
 
     public Client() {
@@ -150,10 +158,12 @@ public class Client implements Serializable {
         this.compteList = compteList;
     }
 
+    @JsonIgnore
     public Conseiller getIdconseiller() {
         return idconseiller;
     }
 
+    @JsonProperty
     public void setIdconseiller(Conseiller idconseiller) {
         this.idconseiller = idconseiller;
     }
@@ -182,5 +192,5 @@ public class Client implements Serializable {
     public String toString() {
         return "fr.gtm.domaine.Client[ idclient=" + idclient + " ]";
     }
-    
+
 }

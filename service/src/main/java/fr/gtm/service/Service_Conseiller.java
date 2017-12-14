@@ -22,31 +22,29 @@ import javax.persistence.Persistence;
  */
 public class Service_Conseiller {
 
-    public static List<Client> listerClientsConseiller(Conseiller conseiller){
+    public static String listerClientsConseiller(Conseiller conseiller) {
 
-       List<Client> clients;        
+        List<Client> clients;
         EntityManagerFactory emf;
+        String lcjson = "";
         //import
         emf = Persistence.createEntityManagerFactory("fr.gtm_domaine_jar_1.0-SNAPSHOTPU");
         ConseillerJpaController cjc = new ConseillerJpaController(emf);
+
         Conseiller cons = cjc.findConseiller(conseiller.getIdconseiller());
         clients = cons.getClientList();
-        
-        //json-isation
-//        ObjectMapper objectMapper = new ObjectMapper();        
-//        try {
-//            String lcjson = objectMapper.writeValueAsString(clients);
-//            
-//              System.out.println(lcjson);
-//            
-//        } catch (JsonProcessingException ex) {
-//            Logger.getLogger(Service_Conseiller.class.getName()).log(Level.SEVERE, null, ex);
-//            
-//        }
-      
-        
 
-        return clients;
+        //json-isation
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            lcjson = objectMapper.writeValueAsString(clients);
+
+        } catch (JsonProcessingException ex) {
+            Logger.getLogger(Service_Conseiller.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+        return lcjson;
 
     }
 

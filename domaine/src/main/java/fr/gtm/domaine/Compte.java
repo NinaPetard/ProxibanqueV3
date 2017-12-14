@@ -27,9 +27,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author Nina
+ * @author Nina et Robinson
+ * Codage de la classe Compte:
+ * Un compte a pour attributs un numero de compte, un client, une date d'ouverture, un type(courant ou epargne) et un solde
+ * Cette classe est une "entity class" et va permettre la persistence en base de données d'un compte.
  */
+
 @Entity
 @Table(name = "COMPTE")
 @XmlRootElement

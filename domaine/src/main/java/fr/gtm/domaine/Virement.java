@@ -22,9 +22,13 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author Nina
+ * @author Nina et Robinson
+ * Codage de la classe virement.
+ * Cette classe va permttre l'instanciation d'un virement caractérisé par ces attributs:un numero de virement, un compte debiteur, un compte crediteur, un montant,
+ * une date de virement, un libelle de virmenent et un login de conseiller.
+ * Cette classe est une "entity class" et va permettre la persistence en base de données d'un virement.
  */
+
 @Entity
 @Table(name = "VIREMENT")
 @XmlRootElement

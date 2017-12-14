@@ -22,9 +22,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author Nina
+ * @author Nina et Robinson
+ * Codage de la classe Conseiller 
+ * Un conseiller possède comme attributs un login, un mot de passe, un nom, un prenom ainsi qu'une liste de clients.
+ * Cette classe est une "entity class" et va permettre la persistence en base de données d'un conseiller.
  */
+
 @Entity
 @Table(name = "CONSEILLER")
 @XmlRootElement

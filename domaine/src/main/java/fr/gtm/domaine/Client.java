@@ -26,9 +26,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author Nina
+ * @author Nina et Robinson
+ * Codage de la classe Client:
+ * Un client a pour attributs une adresse, un code postal, une ville, un numéro de téléphone, un email,
+ * une liste de comptes (CompteCourant, CompteEpargne), et un Conseiller.
+ * Cette classe est une "entity class" et va permettre la persistence en base de données d'un client.
  */
+
 @Entity
 @Table(name = "CLIENT")
 @XmlRootElement

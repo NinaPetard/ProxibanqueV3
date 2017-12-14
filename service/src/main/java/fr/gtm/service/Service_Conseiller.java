@@ -33,16 +33,16 @@ public class Service_Conseiller {
         clients = cons.getClientList();
         
         //json-isation
-        ObjectMapper objectMapper = new ObjectMapper();        
-        try {
-            String lcjson = objectMapper.writeValueAsString(clients);
-            
-              System.out.println(lcjson);
-            
-        } catch (JsonProcessingException ex) {
-            Logger.getLogger(Service_Conseiller.class.getName()).log(Level.SEVERE, null, ex);
-            
-        }
+//        ObjectMapper objectMapper = new ObjectMapper();        
+//        try {
+//            String lcjson = objectMapper.writeValueAsString(clients);
+//            
+//              System.out.println(lcjson);
+//            
+//        } catch (JsonProcessingException ex) {
+//            Logger.getLogger(Service_Conseiller.class.getName()).log(Level.SEVERE, null, ex);
+//            
+//        }
       
         
 

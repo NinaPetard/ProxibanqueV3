@@ -6,10 +6,8 @@ import java.util.ArrayList;
 
 
 
-public class App 
-{
-    public static void main( String[] args )
-    {
+public class App {
+    public static void main( String[] args ){
         Conseiller conseiller = new Conseiller();
         conseiller.setIdconseiller(2L);
         

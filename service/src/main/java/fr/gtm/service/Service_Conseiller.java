@@ -11,7 +11,7 @@ import javax.persistence.Persistence;
 
 public class Service_Conseiller {
 
-    public Service_Conseiller() {
+    public void Service_Conseiller() {
     }
 
     public List<Client> listeClientsConseiller(Conseiller conseiller) {

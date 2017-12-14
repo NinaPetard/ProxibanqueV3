@@ -26,9 +26,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author Nina
+ * @author Nina et Robinson
+ * Codage de la classe Client:
+ * Un client a pour attributs une adresse, un code postal, une ville, un numéro de téléphone, un email,
+ * une liste de comptes (CompteCourant, CompteEpargne), et un Conseiller.
+ * Cette classe est une "entity class" et va permettre la persistence en base de données d'un client.
  */
+
 @Entity
 @Table(name = "CLIENT")
 @XmlRootElement
@@ -43,6 +47,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Client.findByTelephone", query = "SELECT c FROM Client c WHERE c.telephone = :telephone")})
 public class Client implements Serializable {
 
+    //Attributs
+    
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -76,6 +82,8 @@ public class Client implements Serializable {
     @JsonIgnore
     private Conseiller idconseiller;
 
+    
+    //Constructeur
     public Client() {
     }
 
@@ -93,6 +101,7 @@ public class Client implements Serializable {
         this.telephone = telephone;
     }
 
+    //Getters et setters
     public Long getIdclient() {
         return idclient;
     }

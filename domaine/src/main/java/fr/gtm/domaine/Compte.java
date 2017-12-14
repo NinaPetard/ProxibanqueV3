@@ -27,9 +27,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author Nina
+ * @author Nina et Robinson
+ * Codage de la classe Compte:
+ * Un compte a pour attributs un numero de compte, un client, une date d'ouverture, un type(courant ou epargne) et un solde
+ * Cette classe est une "entity class" et va permettre la persistence en base de données d'un compte.
  */
+
 @Entity
 @Table(name = "COMPTE")
 @XmlRootElement
@@ -42,6 +45,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Compte.findByDecouvert", query = "SELECT c FROM Compte c WHERE c.decouvert = :decouvert")})
 public class Compte implements Serializable {
 
+    //Attributs
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -73,6 +77,7 @@ public class Compte implements Serializable {
     @OneToMany(mappedBy = "idcomptecredit")
     private List<Virement> virementList1;
 
+    //Constructeur
     public Compte() {
     }
 
@@ -88,6 +93,7 @@ public class Compte implements Serializable {
         this.decouvert = decouvert;
     }
 
+    //Getters et setters
     public Long getIdcompte() {
         return idcompte;
     }

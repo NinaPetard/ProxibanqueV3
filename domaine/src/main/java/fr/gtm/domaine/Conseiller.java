@@ -22,9 +22,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author Nina
+ * @author Nina et Robinson
+ * Codage de la classe Conseiller 
+ * Un conseiller possède comme attributs un login, un mot de passe, un nom, un prenom ainsi qu'une liste de clients.
+ * Cette classe est une "entity class" et va permettre la persistence en base de données d'un conseiller.
  */
+
 @Entity
 @Table(name = "CONSEILLER")
 @XmlRootElement
@@ -37,6 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Conseiller.findByPassword", query = "SELECT c FROM Conseiller c WHERE c.password = :password")})
 public class Conseiller implements Serializable {
 
+    //Attributs
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -57,6 +61,7 @@ public class Conseiller implements Serializable {
     @JsonIgnoreProperties("conseiller")
     private List<Client> clientList;
 
+    //Constructeur
     public Conseiller() {
     }
 
@@ -71,6 +76,7 @@ public class Conseiller implements Serializable {
         this.password = password;
     }
 
+    //Getters et setters
     public Long getIdconseiller() {
         return idconseiller;
     }

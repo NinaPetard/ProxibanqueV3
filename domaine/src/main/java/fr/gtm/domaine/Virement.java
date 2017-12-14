@@ -22,9 +22,13 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author Nina
+ * @author Nina et Robinson
+ * Codage de la classe virement.
+ * Cette classe va permttre l'instanciation d'un virement caractérisé par ces attributs:un numero de virement, un compte debiteur, un compte crediteur, un montant,
+ * une date de virement, un libelle de virmenent et un login de conseiller.
+ * Cette classe est une "entity class" et va permettre la persistence en base de données d'un virement.
  */
+
 @Entity
 @Table(name = "VIREMENT")
 @XmlRootElement
@@ -35,6 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Virement.findByDatev", query = "SELECT v FROM Virement v WHERE v.datev = :datev")})
 public class Virement implements Serializable {
 
+    //Attributs
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -52,6 +57,7 @@ public class Virement implements Serializable {
     @ManyToOne
     private Compte idcomptecredit;
 
+    //Constructeur
     public Virement() {
     }
 
@@ -59,6 +65,7 @@ public class Virement implements Serializable {
         this.idvirement = idvirement;
     }
 
+    //Getters et setters
     public Long getIdvirement() {
         return idvirement;
     }

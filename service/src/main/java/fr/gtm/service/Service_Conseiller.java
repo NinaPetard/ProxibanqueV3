@@ -18,7 +18,10 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author adminl
+ * @author Nina et Robinson
+ * Codage de la classe Service_Conseiller
+ * Cette classe permet d'obtenir la liste des clients par l'intermédiaire de l'id du conseiller identifié
+ * Cette liste est recupérée sous forme d'un JSON qui sera recupéré par une application Client et affichée.
  */
 public class Service_Conseiller {
 

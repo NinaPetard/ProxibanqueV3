@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -50,7 +51,7 @@ public class Conseiller implements Serializable {
     @Basic(optional = false)
     @Column(name = "PASSWORD")
     private String password;
-    @OneToMany(mappedBy = "idconseiller")
+    @OneToMany(mappedBy = "idconseiller", fetch = FetchType.EAGER)
     private List<Client> clientList;
 
     public Conseiller() {

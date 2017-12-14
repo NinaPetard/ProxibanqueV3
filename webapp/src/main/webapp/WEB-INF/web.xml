@@ -4,4 +4,25 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  
+  <display-name>ProxiBanquev3</display-name>
+	<welcome-file-list>
+		<welcome-file>login.html</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>MaServlet1_Login</servlet-name>
+		<servlet-class>fr.gtm.presentation.MaServlet1_Login</servlet-class>
+	</servlet>
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/error_page.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error_page.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error_page.jsp</location>
+	</error-page>
 </web-app>

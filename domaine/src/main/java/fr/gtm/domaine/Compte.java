@@ -5,12 +5,17 @@
  */
 package fr.gtm.domaine;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -55,11 +60,16 @@ public class Compte implements Serializable {
     @Basic(optional = false)
     @Column(name = "DECOUVERT")
     private BigDecimal decouvert;
+
     @JoinColumn(name = "IDCLIENT", referencedColumnName = "IDCLIENT")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("compteList")
     private Client idclient;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "idcomptedebit")
     private List<Virement> virementList;
+    @JsonIgnore
     @OneToMany(mappedBy = "idcomptecredit")
     private List<Virement> virementList1;
 
@@ -127,19 +137,23 @@ public class Compte implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<Virement> getVirementList() {
         return virementList;
     }
 
+    @JsonProperty
     public void setVirementList(List<Virement> virementList) {
         this.virementList = virementList;
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<Virement> getVirementList1() {
         return virementList1;
     }
 
+    @JsonProperty
     public void setVirementList1(List<Virement> virementList1) {
         this.virementList1 = virementList1;
     }
@@ -168,5 +182,5 @@ public class Compte implements Serializable {
     public String toString() {
         return "fr.gtm.domaine.Compte[ idcompte=" + idcompte + " ]";
     }
-    
+
 }

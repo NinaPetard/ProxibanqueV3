@@ -5,6 +5,8 @@
  */
 package fr.gtm.domaine;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -52,6 +54,7 @@ public class Conseiller implements Serializable {
     @Column(name = "PASSWORD")
     private String password;
     @OneToMany(mappedBy = "idconseiller", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("conseiller")
     private List<Client> clientList;
 
     public Conseiller() {

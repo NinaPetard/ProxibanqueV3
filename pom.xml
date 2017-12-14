@@ -29,5 +29,6 @@
     <module>webapp</module>
     <module>presentation</module>
     <module>service</module>
+    <module>serviceweb</module>
   </modules>
 </project>

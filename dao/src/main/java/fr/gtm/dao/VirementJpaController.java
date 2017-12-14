@@ -19,20 +19,26 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
- *
- * @author Nina
+ @author Nina et Robinson
+ * Codage de la classe VirementJpaController
+ * Cette classe permet la connexion a la base de données et la rédaction de transactions
+ * en JPA avec Hibernate.
+ * Permet de mettre en place le CRUD ainsi que des méthodes de récupération de données des virements bancaires.
  */
 public class VirementJpaController implements Serializable {
 
+    //Ouverture de la connexion grace a l'entity manager factory
     public VirementJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
+    //Ouverture des transactions grace à l'entity manager
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
+    //Methode du CRUD avec JPA Hibernate
     public void create(Virement virement) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
@@ -177,6 +183,7 @@ public class VirementJpaController implements Serializable {
         }
     }
 
+    //Methode pour realiser un virement bancaire
     public Virement findVirement(Long id) {
         EntityManager em = getEntityManager();
         try {
@@ -186,6 +193,7 @@ public class VirementJpaController implements Serializable {
         }
     }
 
+    //Methode pour recuperer les comptes après un virement banacaire
     public int getVirementCount() {
         EntityManager em = getEntityManager();
         try {

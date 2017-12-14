@@ -21,20 +21,26 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
- *
- * @author Nina
+ * @author Nina et Robinson
+ * Codage de la classe ClientJpaController
+ * Cette classe permet la connexion a la base de données et la rédaction de transactions
+ * en JPA avec Hibernate.
+ * Permet de mettre en place le CRUD ainsi que des méthodes de récupération de données du client.
  */
 public class ClientJpaController implements Serializable {
 
+    //Ouverture de la connexion grace a l'entity manager factory
     public ClientJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
+    //Ouverture des transactions grace à l'entity manager
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
+    //Methode du CRUD avec JPA Hibernate
     public void create(Client client) throws PreexistingEntityException, Exception {
         if (client.getCompteList() == null) {
             client.setCompteList(new ArrayList<Compte>());
@@ -200,6 +206,7 @@ public class ClientJpaController implements Serializable {
         }
     }
 
+    //Methode pour recuperer un client avec son id
     public Client findClient(Long id) {
         EntityManager em = getEntityManager();
         try {

@@ -187,7 +187,7 @@ public class ConseillerJpaController implements Serializable {
         }
     }
 
-    //Methode pour recuperer les comptes associés au conseiller
+    //Methode pour connaitre le nombre de conseillers
     public int getConseillerCount() {
         EntityManager em = getEntityManager();
         try {

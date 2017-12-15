@@ -8,8 +8,8 @@ package fr.gtm.webservice;
 import fr.gtm.service.Service_Conseiller;
 import static fr.gtm.service.Service_Conseiller.listerClientsConseiller;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
 
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -20,14 +20,22 @@ public class WebService_Conseiller {
 
     @POST
     @Path("/listeclients")
-    @Consumes(MediaType.TEXT_PLAIN)    
-    @Produces(MediaType.TEXT_PLAIN)    
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_PLAIN)
     public String sendCliData(String userIdCons) {
-        String clijson ;
+        String clijson;
         Long idcons = Long.parseLong(userIdCons, 10);
-        
         clijson = listerClientsConseiller(idcons);
         return clijson;
+    }
+    
+    //méthode utilisée pour tester, à supprimer
+    @GET
+    @Path("/listeclients")
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String sendCliData() {
+        return "lalala";
     }
 
 }

@@ -265,6 +265,7 @@ public class CompteJpaController implements Serializable {
         }
     }
 
+    //Methode pour connaitre le nombre de comptes d'un client
     public int getCompteCount() {
         EntityManager em = getEntityManager();
         try {

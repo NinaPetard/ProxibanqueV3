@@ -216,6 +216,7 @@ public class ClientJpaController implements Serializable {
         }
     }
 
+    //Methode pour connaitre le nombre de clients
     public int getClientCount() {
         EntityManager em = getEntityManager();
         try {

@@ -193,7 +193,7 @@ public class VirementJpaController implements Serializable {
         }
     }
 
-    //Methode pour recuperer les comptes après un virement banacaire
+    //Methode pour recuperer le nombre de virements
     public int getVirementCount() {
         EntityManager em = getEntityManager();
         try {
